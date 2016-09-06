@@ -1,0 +1,206 @@
+<ion-view view-title="Add Contacts">
+
+  <ion-nav-bar class="bar-calm history-header profile-header" align-title="center">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon backBtns" ng-click="goBack()">
+        Cancel
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      Add Contact
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon header-rightBtn" ng-click="saveContacts(contact)">
+        Save
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <!--<div class="bar bar-header bar-calm history-header profile-header">
+
+    <span ng-click="goBackTo()" class="title addContct-cancel-btn">Cancel</span>
+
+
+
+
+    <span class="title history-header-title profile-header-title">Add Contact</span>
+
+    <span ng-click="goBackTo()" class="title addContct-done-btn">Done</span>
+  </div>-->
+  <ion-content padding="true" class="has-header addContct-content">
+    <div class="row person-main-content">
+      <div class="col col-40 addBlocked-imgDiv" on-tap="setImage()">
+        <div class="addBlocked-img" src="img/person.png" ng-if="!contact.image">
+          <i class="ion-ios-camera-outline addBlocked-cameraIcon"></i>
+        </div>
+        <div class="addBlocked-img" ng-if="contact.image">
+          <img class="addContact-personImg" ng-src="{{contact.image}}">
+        </div>
+      </div>
+      <div class="col col-60">
+        <input class="addContct-inputBox-text" type="text" placeholder="First Name" ng-model="contact.firstName">
+        <input class="addContct-inputBox-text" type="text" placeholder="Last Name" ng-model="contact.lastName">
+        <input class="addContct-inputBox-text" type="text" placeholder="Alias" ng-model="contact.alias">
+        <!--<div class="list">
+          <label class="item item-input addContct-main-inputBox">
+            <input class="addContct-inputBox-text" type="text" placeholder="First Name" ng-model="contact.firstName">
+          </label>
+          <label class="item item-input addContct-main-inputBox">
+            <input class="addContct-inputBox-text" type="text" placeholder="Last Name" ng-model="contact.lastName">
+          </label>
+          <label class="item item-input addContct-main-inputBox">
+            <input class="addContct-inputBox-text" type="text" placeholder="Alias" ng-model="contact.alias">
+          </label>
+        </div>-->
+      </div>
+    </div>
+
+    <div class="list profile-list">
+
+      <div class="item item-divider addContct-addPhone">
+        <i class="ion ion-android-add addContct-addPhone-icon"></i>
+        <span ng-click="addPhone()" class="">add phone</span>
+      </div>
+
+      <div  ng-if="isActive">
+      <div class="item item-divider addContct-addPhone">
+        <label class="item item-input addContct-inputLabel">
+          <span class="input-label addContct-inputLabel-name">Mobile</span>
+          <input ng-model="contact.mobile" type="tel">
+        </label>
+      </div>
+      <div class="item item-divider addContct-addPhone">
+        <label class="item item-input addContct-inputLabel">
+          <span class="input-label addContct-inputLabel-name">Home</span>
+          <input ng-model="contact.home" type="tel">
+        </label>
+      </div>
+      <div class="item item-divider addContct-addPhone">
+        <label class="item item-input addContct-inputLabel">
+          <span class="input-label addContct-inputLabel-name">Work</span>
+          <input ng-model="contact.work" type="tel">
+        </label>
+      </div>
+      </div>
+
+      <div class="item item-divider addContct-first-divider">
+        <span class="addContct-first-divider-text">Incoming calls are allowed from these</span><br/>
+        <span class="addContct-first-divider-text">numbers</span>
+      </div>
+
+      <div class="item profile-list-item profile-label-dropdown" href="#">
+
+        <label class="item item-input item-select select-label">
+          <div class="input-label addContact-list-item-text">
+            Relationship
+          </div>
+          <select ng-model="contact.relationship">
+            <option>Family</option>
+            <option>Friend</option>
+            <option>Business</option>
+          </select>
+        </label>
+
+        <!--<span class="addContact-list-item-text">Relationship</span>-->
+
+        <!--<div class="profile-list-fiends">-->
+          <!--<select>-->
+            <!--<option>Blue</option>-->
+            <!--<option selected>Green</option>-->
+            <!--<option>Red</option>-->
+          <!--</select>-->
+          <!--<i class="ion-chevron-right profile-list-forwardIcon"></i>-->
+        <!--</div>-->
+      </div>
+
+      <!--<a class="item item-icon-left item-icon-right profile-list-item profile-label" href="#">
+        <i class="icon ion-azure-icon azure-icon-style"></i>
+        <span class="profile-list-item-text">Add to QuickDial</span>
+
+        <div class="profile-list-quickDial">
+          <i class="ion-chevron-right profile-list-forwardIcon"></i>
+        </div>
+      </a>-->
+
+      <ul class="list profile-sec-list">
+       <!-- <span class="item item-icon-left item-toggle profile-list-item profile-list-item-toggle">
+          <i class="icon ion-heart heart-icon-style"></i>
+          Add to Friends
+          <label class="toggle toggle-balanced">
+            <input type="checkbox">
+
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </span>-->
+
+      </ul>
+      <div class="item item-divider profile-item-divider profile-callSetting-divider">
+        Call Settings
+      </div>
+      <ul class="list profile-sec-list">
+        <!--<span class="item item-icon-left item-toggle profile-list-item profile-list-item-toggle">
+          <i class="icon ion-notify-icon notify-icon-style"></i>
+          Notifications
+          <label class="toggle toggle-balanced">
+            <input type="checkbox" ng-model="contact.notifications">
+
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </span>
+-->
+        <span class="item item-toggle profile-list-item profile-list-item-toggle profile-callSetting-item">
+          Allow outgoing calls
+          <label class="toggle toggle-balanced">
+            <input type="checkbox" ng-model="contact.allowOutgoingCalls">
+
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </span>
+
+        <span class="item profile-list-item-box" href="#">
+          <span class="profile-item-toogle-desc">Calls to this contact are allowed. Turn off to<br><span
+            class="profile-item-toogle-desc">only allow incoming calls from this contact</span>
+          </span>
+        </span>
+        <!--<span class="item item-toggle profile-list-item profile-list-item-toggle profile-callSetting-item">
+          Multi-ring outgoing calls
+          <label class="toggle toggle-balanced">
+            <input type="checkbox">
+
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </span>
+        <span class="item profile-list-item-box" href="#">
+          <span class="profile-item-toogle-desc">Calls to this contact are allowed. Turn off to<br><span
+            class="profile-item-toogle-desc">only allow incoming calls from this contact</span>
+          </span>
+        </span>
+        <span class="item item-toggle profile-list-item profile-list-item-toggle profile-callSetting-item">
+          Override calling rules
+          <label class="toggle toggle-balanced">
+            <input type="checkbox">
+
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </span>
+        <span class="item profile-list-item-box profile-item-bottom-hide" href="#">
+          <span class="profile-item-toogle-desc">Calls to this contact are allowed. Turn off to<br><span
+            class="profile-item-toogle-desc">only allow incoming calls.</span>
+          </span>
+        </span>-->
+      </ul>
+    </div>
+
+  </ion-content>
+
+</ion-view>

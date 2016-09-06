@@ -1,0 +1,38 @@
+<ion-view>
+  <ion-content padding="true" class="signup-background-img" overflow-scroll="false">
+    <div class="signup-main-container">
+      <h3 class="signup-header">Sign In</h3>
+
+      <div class="signup-form-main-border signin-form-main-border">
+        <label class="item item-input signup-textbox">
+          <span class="input-label input-label-custom">Email</span>
+          <input type="email" ng-model="user.email">
+        </label>
+
+        <label class="item item-input signup-textbox">
+          <span class="input-label input-label-custom">Password</span>
+          <input type="password" ng-model="user.password">
+        </label>
+      </div>
+     <!-- <div class="signup-checkbox">
+        <input type="checkbox" name="terms" value="terms"><span
+        class="signup-terms">Accept Terms and Conditions</span>
+      </div>-->
+
+      <button type="button" class="button button-light signup-submit-button" ng-click="signIn(user)">
+        Login
+      </button>
+
+      <div class="signup-footer">
+        <span>Don't have account?</span><a class="signin-signupBtn" ui-sref="signup"> Sign up</a>
+      </div>
+
+
+      <div class="signup-footer">
+        <a class="signin-signupBtn"  ui-sref="changePassword">Forgot Password</a>
+      </div>
+
+
+    </div>
+  </ion-content>
+</ion-view>

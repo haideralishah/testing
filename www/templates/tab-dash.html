@@ -1,0 +1,103 @@
+<ion-view view-title="Dashboard">
+  <div class="bar bar-header bar-calm dash-header">
+    <i class="ion ion-android-sync dash-refreshIcon" ng-click="doRefresh()"></i>
+
+    <!--<h1 class="title history-header-title profile-header-title">Julliet Ericksson</h1>-->
+    <img class="dash-main_logo" src="img/teleCalm_logo.png">
+<!--
+
+
+    <span class="dash-connectedTxt"><i class="icon ion-record connected-circle"></i>Connected</span>
+
+-->
+
+
+
+    <i class="icon ion-ios-recording-outline dash-recordingIcon"  ui-sref="tab.voicemailHistory" ><span ng-if="notificationCount != 0" class="badge badge-assertive">{{notificationCount}}<span/></i>
+  </div>
+  <div class="bar bar-subheader dash-subheader">
+    <div class="dash-counter-mainDiv">
+      <div class="dash-counter-heading">
+        <span>CALL COUNTER </span>
+      </div>
+
+      <div class="row dash-counter-div">
+        <div class="col-33 dash-couter-separater" ng-click="goTo('contact')">
+          <img class="dash-calling-icon" src="img/callIn-callOut-icon.png">
+          <span class="dash-counter-count">{{homeScreenCounters.contacts}}</span>
+          <span class="dash-counter-count-text">Contacts</span>
+        </div>
+        <div class="col-33 dash-couter-separater dash-couter-separater-border" ng-click="goTo('blocked')">
+          <i class="fa fa-ban dash-block-icon"></i>
+          <span class="dash-counter-count">{{homeScreenCounters.blocked}}</span>
+          <span class="dash-counter-count-text">Blocked</span>
+        </div>
+        <div class="col-33 dash-couter-separater dash-couter-separater-border" ng-click="goTo('stranger')">
+          <i class="fa fa-user-secret dash-stranger-icon"></i>
+          <span class="dash-counter-count">{{homeScreenCounters.strangers}}</span>
+          <span class="dash-counter-count-text">Strangers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ion-content scroll='true' class="has-header has-subheader dash-has-subheader">
+    <div class="dash-recentHead">
+    <span>
+      RECENT HISTORY
+    </span>
+    </div>
+   <!-- <div>
+      <img class="dash_img" src="img/dash_img.png">
+    </div>-->
+    <!--<div class="dash-counter-mainDiv">
+      <div class="dash-counter-heading">
+        <span>CALL COUNTER </span>
+      </div>
+
+      <div class="row dash-counter-div">
+        <div class="col-33 dash-couter-separater" ng-click="goTo('contact')">
+          <img class="dash-calling-icon" src="img/callIn-callOut-icon.png">
+          <span class="dash-counter-count">{{homeScreenCounters.contacts}}</span>
+          <span class="dash-counter-count-text">Contacts</span>
+        </div>
+        <div class="col-33 dash-couter-separater" ng-click="goTo('blocked')">
+          <i class="fa fa-ban dash-block-icon"></i>
+          <span class="dash-counter-count">{{homeScreenCounters.blocked}}</span>
+          <span class="dash-counter-count-text">Blocked</span>
+        </div>
+        <div class="col-33 dash-couter-separater" ng-click="goTo('stranger')">
+          <i class="fa fa-user-secret dash-stranger-icon"></i>
+          <span class="dash-counter-count">{{homeScreenCounters.strangers}}</span>
+          <span class="dash-counter-count-text">Strangers</span>
+        </div>
+      </div>
+    </div>
+    <div class="dash-recentHead">
+    <span>
+      RECENT HISTORY
+    </span>
+    </div>-->
+      <ion-list class="dash-list" ng-if="data.items.length>0">
+        <ion-item can-reorder="true" ng-repeat="item in data.items"
+                  class="has-header dash-recentHis-list-item" ng-click="showDetail(item)"
+                  item="item2"
+          >
+          <img class="history-calling-icon" ng-src="{{item.imgSrc}}">
+          <div class="dashhistory-list-content">
+            <span class="history-list-item-name">{{ item.contactFirstName + " " +item.contactLastName }}</span><br/>
+            <span class="history-list-item-number">{{ item.call_direction=='inbound'?(item.fromCaller.substring(0,1)=='1'?item.fromCaller.substring(1,item.fromCaller.length):item.fromCaller):(item.toCaller.substring(0,1)=='1'?item.toCaller.substring(1,item.toCaller.length):item.toCaller) | telephoneformat }}</span>
+          </div>
+          <div class="dashHistory-list-content-right-content">
+            <span>{{item.moment}}</span><br/>
+            <!--<span am-time-ago="{{item.moment}}"></span>-->
+            <!--<span>{{item.initiationTime?moment().calendar():''}}</span><br/>-->
+            <span class="history-list-content-right-content-status hailee-dash-font" ng-class={dashColorRed:item.userCallType=='blocked',dashStrangerColor:item.userCallType=='stranger'}><i ng-if="item.voicemail" class="icon ion-ios-recording-outline dashHistory-listItem-voicemailIcon"></i>{{item.showDuration}}<!--{{item.status}}--></span>
+            <!--<span class="history-list-content-right-content-status" ng-class="item.type=='blocked' ? 'colorRed' : ''">{{item.status}}</span>-->
+          </div>
+        </ion-item>
+      </ion-list>
+      <div ng-if="data.items.length==0" style="margin-left:3%;">
+        <h6>No call history</h6>
+      </div>
+  </ion-content>
+</ion-view>

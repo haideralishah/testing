@@ -1,0 +1,45 @@
+<ion-view>
+  <ion-nav-bar class="bar-calm history-header profile-header" align-title="center">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon backBtns" ng-click="goBack()">
+        <i class="ion ion-chevron-left profile-back-icon"></i>
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      Voicemail
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+      <!-- <button class="button button-icon header-rightBtn" ng-click="goBack()">
+         Edit
+       </button>-->
+      <i class="ion ion-levels voicemail-levelIcon" ui-sref="tab.voicemailHistory"></i>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content class="has-header voicemailContent">
+    <h3 class="voicemail-textName">Juliet Ericksson</h3>
+    <p class="voicemail-textNum">(817)728-4471</p>
+    <ion-audio-track ng-repeat="track in tracks" track="track">
+
+        <div>
+          <h2>{{tracks.title}}</h2>
+          <p>{{tracks.artist}}</p>
+
+        </div>
+        <div class="">
+          <ion-audio-progress-bar track="track" display-time>
+
+          </ion-audio-progress-bar>
+          <ion-audio-progress track="track" class="ng-binding">{{scope.track.progress}}</ion-audio-progress>
+        </div>
+      <div class="voicemail-controlDiv">
+        <ion-audio-controls>
+          <i class="icon ion-ios-rewind voicemail-forwardIcon"></i>
+          <a class="button button-icon icon voicemail-playIcon" ion-audio-play></a>
+          <ion-spinner icon="ios" style="position: relative; top: 8px; left: 4px"></ion-spinner>
+          <i class="icon ion-ios-fastforward voicemail-forwardIcon"></i>
+
+        </ion-audio-controls>
+      </div>
+    </ion-audio-track>
+  </ion-content>
+</ion-view>

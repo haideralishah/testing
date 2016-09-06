@@ -1,0 +1,63 @@
+<ion-view>
+  <!--<ion-nav-bar class="bar-calm history-header profile-header" align-title="center">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon backBtns">
+        <i class="ion ion-chevron-left"></i>
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      Custom Voicemail
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+
+      <button class="button button-icon header-rightBtn">
+        Save
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-nav-bar   class="has-header" align-title="center">
+  </ion-nav-bar>-->
+  <div class="bar bar-header bar-calm dash-header">
+    <span class="headcss"   >Cancel</span>
+    <span class="set-headerTxt">
+    Settings
+      </span>
+    <span class="headcss" >Save</span>
+  </div>
+
+  <ion-content class="has-header set-content" padding="true" overflow-scroll="false">
+    <div class="list">
+      <div class="item item-divider customvoicemail-divider">
+      </div>
+      <a  class="item customvoicemail-item" href="#">
+       Default
+      </a>
+      <ion-list>
+        <ion-radio style="margin-left:10px; border-left:none"   ng-model="choice" ng-value="'A'">Custom</ion-radio>
+      </ion-list>
+      <div class="item item-divider">
+        <ion-audio-track track="track">
+          <div class="">
+            <ion-audio-progress-bar class="checking" track="track" display-time>
+            </ion-audio-progress-bar>
+            <ion-audio-controls>
+              <a class="button button-icon icon voicemail-playBtn" ion-audio-play></a>
+              <ion-spinner icon="ios" style="position: relative; top: 40px; left: 35%"></ion-spinner>
+            </ion-audio-controls>
+            <i class="icon ion-volume-high voicemail-volumeIcon"></i>
+            <ion-audio-progress class="voicemail-progress" track="track" class="ng-binding">{{scope.track.progress}}</ion-audio-progress>
+            <ion-audio-duration class="voicemail-progress" track="track" class="ng-binding">{{scope.track.duration?scope.track.duration:"00:00"}}</ion-audio-duration>
+          </div>
+        </ion-audio-track>
+      </div>
+
+
+     </div>
+    <button ng-click="captureAudio()"  class="button button-light notify-returnBtn">
+     Record
+    </button>
+
+
+  </ion-content>
+</ion-view>

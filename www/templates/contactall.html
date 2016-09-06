@@ -1,0 +1,79 @@
+<ion-view>
+  <div class="bar bar-header bar-calm contacts-header">
+
+    <div class="history-header-content">
+
+      <h1 class="title history-header-title">Contacts</h1>
+      <a href="#/tab/add-contacts/" class="title history-header-title history-header-second-title-">Add</a>
+
+      <!--<div class="bar bar-subheader history-subHeader">
+
+        <div class="button-bar history-button-bar">
+          <a class="button history-button-bar-button" ng-click="toggle(b.state)" ng-class="{'active':b.flag}"
+             ng-repeat="b in btns"><i class="{{b.icon}} history-tab-button-icon"></i>{{b.label}}</a>
+        </div>
+      </div>-->
+    </div>
+    <div class="contacts-second-header-bar">
+      <div class="list list-inset history-search-bar">
+        <label class="item item-input search-label">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="Search Contact"  ng-model="searchText" ng-keypress="closeKeyboard($event)" ng-change="activeSearchCross()">
+          <i class="icon ion-close-circled search-crossIcon" ng-if="searchText && active" on-tap="clearSearch()"></i>
+        </label>
+      </div>
+      <a ng-class="{'searchbar-cancelBtnDeactive': !searchText}" class="searchbar-cancelBtn" ng-click="cancelSearch()">Cancel</a>
+      <!--<div class="history-second-header-bar-content">
+        <p>{{callName}} Calls</p>
+      </div>-->
+    </div>
+
+  </div>
+
+  <div class="contacts-letterCol">
+    <span href="tab/contacts.html#A">A</span> <br> <span>B</span> <br> <span>C</span> <br> D <br> E <br> F <br> G <br> H <br> I <br> <a href="#J">J</a> <br> K <br> L <br> M <br>
+    N <br> O <br> P <br> Q <br> R <br> S <br> T <br> U <br> V <br> W <br> X <br> Y <br> Z
+  </div>
+
+  <ion-content padding="true" class="has-header contacts-content" overflow-scroll="false">
+    <ion-list class="contacts-list">
+      <div ng-repeat="group in groups | filter:{ name: searchText.substring(0,1)} ">
+        <ion-item class="contacts-list-bar">
+          &nbsp;
+          {{group.name}}
+        </ion-item>
+        <ion-item class="item-accordion contacts-lists-item"
+                  ng-repeat="item in group.items | filter:{ contactFirstName: searchText}" ui-sref="tab.profile({id:item._id})">
+          <h2 class="contacts-list-text">{{ item.contactFirstName }} {{item.contactLastName}}</h2>
+        </ion-item>
+      </div>
+    </ion-list>
+
+    <!--<ion-list class="contacts-list">
+      <ion-item class="contacts-list-item" auto-list-divider auto-list-divider-value="{{contact.contactFirstName}}" ui-sref="tab.profile({id:contact._id})" ng-repeat="contact in userContacts | filter:searchText">
+        <h2 class="contacts-list-text">{{ contact.contactFirstName }} {{contact.contactLastName}}</h2>
+    </ion-list>-->
+
+
+    <!-- <ion-list class="contacts-list" ng-show="callName === 'allContct'" >
+       &lt;!&ndash;<div class="item item-avatar contacts-list-item" ng-repeat="item in data.items | filter : data.filter | orderBy:sortType:sortReverse">&ndash;&gt;
+       <div class="item contacts-list-item item-icon-right" ng-repeat="item in data.items track by $index | filter:searchText | groupByMonthYear | orderBy:'firstName'" divider-collection-repeat ng-class="{'customDivider': item.firstName.length==1}">
+
+         <h2 class="contacts-list-text">{{ item.firstName }}</h2>
+         <i class="{{item.icon}} contacts-blockIcon"></i>
+
+       </div>
+       </ion-list>-->
+
+
+    <!--<ion-content has-header="true" has-subheader="true" padding="false">-->
+
+    <!-- <div class="list">
+       <div class="item" ng-repeat="animal in data.animals | filter : data.filter">{{animal.name}}</div>
+
+     </div>-->
+
+
+  </ion-content>
+
+</ion-view>

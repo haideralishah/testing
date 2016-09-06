@@ -1,0 +1,183 @@
+<ion-view view-title="">
+  <ion-nav-bar class="bar-calm history-header profile-header" align-title="center">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon backBtns" ng-click="goBack()">
+        <i class="ion ion-chevron-left"></i>
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      Juliet Erickson
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon header-rightBtn" ng-click="editContacts()" ng-if="!enableEdit">
+        Edit
+      </button>
+      <button class="button button-icon header-rightBtn" ng-click="saveContacts(contactInfo)" ng-if="enableEdit">
+        Save
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <!--  <div class="bar bar-header bar-calm history-header profile-header">
+      <ion-nav-buttons side="left">
+        <button class="button" ng-click="goBack()">
+          <i class="ion ion-chevron-left"></i>
+        </button>
+      </ion-nav-buttons>
+
+      <h1 class="title history-header-title profile-header-title">Julliet Ericksson</h1>
+
+      <h1 ng-click="rmFilter()" class="title profile-header-edit">Edit</h1>
+    </div>-->
+  <ion-content padding="true" class="has-header profile-content">
+    <div ng-if="!enableEdit">
+      <div class="row person-main-content">
+        <div class="col col-40">
+          <img class="person-img" src="img/person.png">
+        </div>
+        <div class="col col-60">
+          <div class="profile-main-text">
+            <!--<i class="ion ion-heart profile-heart-icon"></i>-->
+            <span class="profile-main-text-header">Juliet</span>
+            <span class="profile-main-text-name">Juliet Erickson</span>
+          </div>
+          <a class="item item-icon-left profile-history-panel" href="#">
+            <i class="icon ion-ios-clock-outline"></i>
+            History
+          </a>
+        </div>
+      </div>
+
+      <div class="list profile-list">
+
+        <div class="item profile-list-item-first" href="#">
+          <span class="profile-list-item-name">home</span><br>
+          <span class="profile-list-item-num">{{contactInfo}}}</span>
+          <!--<input type="tel" ng-model="contactInfo.contactHome">-->
+        </div>
+
+        <div class="item profile-list-numberBox" href="#">
+          <span class="profile-list-item-name">mobile</span><br>
+          <span class="profile-list-item-num">123456</span>
+          <!--<i class="icon ion-azure-icon azure-icon-style profile-azure-mob-icon"></i>-->
+          <!--<input type="tel" ng-model="contactInfo.contactMobile">-->
+        </div>
+
+        <div class="item profile-list-numberBox" href="#">
+          <span class="profile-list-item-name">work</span><br>
+          <span class="profile-list-item-num">123456</span>
+          <!--<input type="tel" ng-model="contactInfo.contactWork">-->
+        </div>
+
+        <div class="item item-divider profile-item-divider">
+          <p class="profile-item-divider-text">Incoming calls are allowed from these numbers.</p>
+        </div>
+
+        <a class="item profile-list-itemLabel profile-label" href="#">
+          <span class="profile-list-item-text">Relationship</span>
+          <div class="profile-list-fiends">
+            <span>Friend</span>
+            <i class="ion-chevron-right profile-list-forwardIcon"></i>
+          </div>
+        </a>
+
+        <!-- <a class="item item-icon-left item-icon-right profile-list-item profile-label" href="#">
+           <i class="icon ion-azure-icon azure-icon-style"></i>
+           <span class="profile-list-item-text">Add to QuickDial</span>
+
+           <div class="profile-list-quickDial">
+             <span>mobile</span>
+             <i class="ion-chevron-right profile-list-forwardIcon"></i>
+           </div>
+         </a>-->
+
+        <ul class="list profile-sec-list">
+          <!--<span class="item item-icon-left item-toggle profile-list-item profile-list-item-toggle">
+            <i class="icon ion-heart heart-icon-style"></i>
+            Add to Friends
+            <label class="toggle toggle-balanced">
+              <input type="checkbox">
+
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </span>-->
+        <span class="item item-icon-left item-toggle profile-list-item profile-list-item-toggle">
+          <i class="icon ion-notify-icon notify-icon-style"></i>
+          Notifications
+          <label class="toggle toggle-balanced">
+            <input type="checkbox" ng-model="contactInfo.contactNotifications" disabled>
+
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </span>
+        </ul>
+        <div class="item item-divider profile-item-divider profile-callSetting-divider">
+          Call Settings
+        </div>
+        <ul class="list profile-third-list">
+        <span class="item item-toggle profile-list-item profile-list-item-toggle profile-callSetting-item">
+          Allow outgoing calls
+          <label class="toggle toggle-balanced">
+            <input type="checkbox" ng-model="contactInfo.contactAllowOutgoingCalls" disabled>
+
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </span>
+
+        <span class="item profile-list-item-box" href="#">
+          <span class="profile-item-toogle-desc">Calls to this contact are allowed. Turn off to<br><span
+            class="profile-item-toogle-desc">only allow incoming calls from this contact</span>
+          </span>
+        </span>
+          <!-- <span class="item item-toggle profile-list-item profile-list-item-toggle profile-callSetting-item">
+             Multi-ring outgoing calls
+             <label class="toggle toggle-balanced">
+               <input type="checkbox">
+
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+           </span>
+           <span class="item profile-list-item-box" href="#">
+             <span class="profile-item-toogle-desc">Calls to this contact are allowed. Turn off to<br><span
+               class="profile-item-toogle-desc">only allow incoming calls from this contact</span>
+             </span>
+           </span>
+           <span class="item item-toggle profile-list-item profile-list-item-toggle profile-callSetting-item">
+             Override calling rules
+             <label class="toggle toggle-balanced">
+               <input type="checkbox">
+
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+           </span>
+           <span class="item profile-list-item-box profile-item-bottom-hide" href="#">
+             <span class="profile-item-toogle-desc">Calls to this contact are allowed. Turn off to<br><span
+               class="profile-item-toogle-desc">only allow incoming calls.</span>
+             </span>
+           </span>-->
+        </ul>
+      </div>
+    </div>
+
+    <!--<div class="blockBtn">
+      <button class="button button-light profile-blockList-btn">
+        <i class="fa fa-ban profile-bann-icon"></i>
+        Move to Block List
+      </button>
+    </div>-->
+    <button class="button button-light profile-delete-btn" ng-click="deleteContact()">
+      Delete
+    </button>
+
+  </ion-content>
+
+</ion-view>

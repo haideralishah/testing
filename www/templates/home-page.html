@@ -1,0 +1,32 @@
+<ion-view>
+  <ion-content class="carosel-background" style="z-index: 200" ng-controller="homeCtrl" overflow-scroll="false">
+    <ks-swiper-container initial-slide="0" speed="2000" pagination-is-active="true" loop="false"
+                         show-nav-buttons="false" show-pager="true" slides-per-view="1" show-pagination="true"
+                         space-between="0" pagination-clickable="false" on-ready="onReadySwiper(swiper)">
+      <ks-swiper-slide class="swiper-slide" ng-repeat="s in [1,2,3]">
+        <img ng-src="img/splash-img1.png">
+
+
+        <p ng-if="s!==3" class="swiperPara"><span class="swiperPara-span">Manage your loved one's</span><span>teleCalm desk phone</span>
+
+        <p ng-if="s===3" class="swiperParas"><span class="swiperPara-span">Manage your loved one's</span><span>teleCalm desk phone</span>
+        </p>
+
+        <div class="rect">
+          <div class="circle"></div>
+        </div>
+
+        <button type="button" ng-if="s===3" class="button button-light carousel-btn" ng-click="signin()">
+          Getting Started
+        </button>
+      </ks-swiper-slide>
+    </ks-swiper-container>
+    <!-- <div class="buttons">
+       <button type="button" onclick="alert('hello')" class="btn btn-primary" style="margin:0px auto">Login</button>
+       <button type="button" onclick="alert('hello')" class="btn btn-default" style="margin:0px auto">SignUp</button>
+     </div>-->
+  </ion-content>
+</ion-view>
+
+
+

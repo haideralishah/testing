@@ -1,0 +1,110 @@
+<ion-view>
+  <ion-content overflow-scroll="false">
+    <div ui-view="tab-contacts-details"></div>
+  </ion-content>
+</ion-view>
+
+
+<!--
+<ion-view>
+  <div class="bar bar-header bar-calm contacts-header">
+
+    <div class="history-header-content">
+
+      <h1 class="title history-header-title">Contacts</h1>
+      <a href="#/tab/add-contacts" class="title history-header-title history-header-second-title-">Add</a>
+
+      &lt;!&ndash;<div class="bar bar-subheader history-subHeader">
+
+        <div class="button-bar history-button-bar">
+          <a class="button history-button-bar-button" ng-click="toggle(b.state)" ng-class="{'active':b.flag}"
+             ng-repeat="b in btns"><i class="{{b.icon}} history-tab-button-icon"></i>{{b.label}}</a>
+        </div>
+      </div>&ndash;&gt;
+    </div>
+    <div class="contacts-second-header-bar">
+      <div class="list list-inset history-search-bar">
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="Search Contact"  ng-model="searchText">
+        </label>
+      </div>
+      &lt;!&ndash;<div class="history-second-header-bar-content">
+        <p>{{callName}} Calls</p>
+      </div>&ndash;&gt;
+    </div>
+
+  </div>
+
+   <div class="contacts-letterCol">
+      <span href="tab/contacts.html#A">A</span> <br> <span>B</span> <br> <span>C</span> <br> D <br> E <br> F <br> G <br> H <br> I <br> <a href="#J">J</a> <br> K <br> L <br> M <br>
+      N <br> O <br> P <br> Q <br> R <br> S <br> T <br> U <br> V <br> W <br> X <br> Y <br> Z
+    </div>
+
+  <ion-content padding="true" class="has-header contacts-content">
+
+    &lt;!&ndash;<ion-list>
+      <div class="history-list">
+        <ion-item auto-list-divider auto-list-divider-value="{{ item.firstName }}" can-reorder="true" ui-sref="all-contacts" ng-repeat="item in data.items | filter : data.filter | orderBy:sortType:sortReverse"  class="has-header history-list-item contacts-list-item"
+                  item="item2"
+          >
+          &lt;!&ndash;<img class="history-calling-icon" src="img/{{item.image}}.png">&ndash;&gt;
+
+          <div class="history-list-content contacts-list-content item-icon-right contacts-item-content">
+            <span class="history-list-item-name contacts-firstName">{{ item.firstName }}</span>
+            <span class="history-list-item-number contacts-lastName">{{item.lastName }}</span>
+            <i class="ion ion-heart contacts-heart-icon"></i>
+          </div>
+
+          &lt;!&ndash;<div class="history-list-content-right-content">
+            <span>{{item.time}}</span><br/>
+            <span class="history-list-content-right-content-status" ng-class="histStat=='blocked' ? 'colorRed' : ''">{{item.status}}</span>
+          </div>&ndash;&gt;
+        </ion-item>
+      </div>
+    </ion-list>&ndash;&gt;
+   &lt;!&ndash; <ion-list class="contacts-list" ng-show="callName !== 'allContct'">
+      &lt;!&ndash;<div class="item item-avatar contacts-list-item" ng-repeat="item in data.items | filter : data.filter | orderBy:sortType:sortReverse">&ndash;&gt;
+      &lt;!&ndash;<div  class="item contacts-list-item item-icon-right"  ui-sref="tab.profile" ng-repeat="item in data.items | filter : data.filter  | filter:searchText | groupByMonthYear | orderBy:'firstName'" divider-collection-repeat ng-class="{'customDivider': item.firstName.length==1}">&ndash;&gt;
+      <div class="item contacts-list-item item-icon-right" ui-sref="tab.profile({id:contact._id})" ng-repeat="contact in userContacts  | filter:searchText | groupByMonthYear | orderBy:'contactFirstName' track by $index" divider-collection-repeat ng-class="{'customDivider': contact.contactFirstName.length==1}">
+
+        <h2 class="contacts-list-text">{{ contact.contactFirstName }}</h2>
+        &lt;!&ndash;<i class="{{item.icon}} contacts-blockIcon"></i>&ndash;&gt;
+      </div>
+      &lt;!&ndash;<ion-item auto-list-divider auto-list-divider-value="{{item.user.gender}}" auto-list-divider-function="dividerFunction" class="item-avatar" ng-repeat="item in items">
+      <img src="{{item.user.picture.thumbnail}} " />
+      <h2>{{item.user.name.first}} {{item.user.name.last}}</h2>
+      <p>{{item.user.location.city}} {{item.user.password}}</p>
+      </ion-item>&ndash;&gt;
+
+    </ion-list>&ndash;&gt;
+
+    <ion-list class="contacts-list">
+      <ion-item class="contacts-list-item" auto-list-divider auto-list-divider-value="{{contact.contactFirstName}}" ui-sref="tab.profile({id:contact._id})" ng-repeat="contact in userContacts | filter:searchText">
+        <h2 class="contacts-list-text">{{ contact.contactFirstName }}</h2>
+    </ion-list>
+
+
+   &lt;!&ndash; <ion-list class="contacts-list" ng-show="callName === 'allContct'" >
+      &lt;!&ndash;<div class="item item-avatar contacts-list-item" ng-repeat="item in data.items | filter : data.filter | orderBy:sortType:sortReverse">&ndash;&gt;
+      <div class="item contacts-list-item item-icon-right" ng-repeat="item in data.items track by $index | filter:searchText | groupByMonthYear | orderBy:'firstName'" divider-collection-repeat ng-class="{'customDivider': item.firstName.length==1}">
+
+        <h2 class="contacts-list-text">{{ item.firstName }}</h2>
+        <i class="{{item.icon}} contacts-blockIcon"></i>
+
+      </div>
+      </ion-list>&ndash;&gt;
+
+
+    &lt;!&ndash;<ion-content has-header="true" has-subheader="true" padding="false">&ndash;&gt;
+
+    &lt;!&ndash; <div class="list">
+       <div class="item" ng-repeat="animal in data.animals | filter : data.filter">{{animal.name}}</div>
+
+     </div>&ndash;&gt;
+
+
+  </ion-content>
+
+</ion-view>
+-->

@@ -1,0 +1,189 @@
+<ion-view view-title="Settings">
+  <div class="bar bar-header bar-calm dash-header">
+    <span class="set-headerTxt">
+    Settings
+      </span>
+</div>
+  <ion-content class="has-header set-content" padding="true" overflow-scroll="false">
+    <div class="list">
+      <div class="item item-divider set-listDivider" style="border:none;border-bottom:2px solid #ddd">
+        calling rules
+      </div>
+      <a class="item set-listItems item-icon-right set-removingBorderAndPadding hidingBorder" href="#/tab/quiet-hours">
+        <div class="settings-backdrop-effect borderHalf2px">
+          Quiet Hours
+          <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+        </div>
+      </a>
+
+      <a class="item set-listItems item-icon-right set-removingBorderAndPadding hidingBorder" href="#/tab/customvoicemessages">
+        <div class="settings-backdrop-effect borderHalf2px">
+          Voice Messages Settings
+          <i class="icon ion-gear-a"></i>
+        </div>
+      </a>
+
+
+      <li class="item item-toggle hidingBorder set-listItems" style="margin-left: 20px;color:black ; text-transform: none ">
+        Enable the teleCalm rules engine
+        <label class="toggle toggle-positive">
+          <input type="checkbox" ng-model="userPlivoRulesSettings.checked" ng-change="setPlivoRulesStatus()">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+
+      <div class="item item-divider item-text-wrap set-accountDivider" style="border:none;border-top: 1px solid #ddd;border-bottom:2px solid #ddd">
+        <span class="set-accountDivider-txt">Turning off will disable teleCalm rules and phone will function in normal
+          manner.</span>
+      </div>
+
+     <!-- <a class="item set-listItems item-icon-right set-removingBorderAndPadding hidingBorder" href="#/tab/quiet-hours">
+        <div class="settings-backdrop-effect borderHalf2px">
+          Quiet Hours
+          <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+          <label class="toggle toggle-balanced">
+            <input type="checkbox" ng-model="contactInfo.contactNotifications" disabled>
+
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </div>
+      </a>-->
+      <!--<a class="item set-listItems item-icon-right set-removingBorderAndPadding hidingBorder" href="#/tab/quiet-hours">
+        <div class="borderHalf2px">
+          Quiet Hours
+          <label class="toggle toggle-balanced">
+            <input type="checkbox" ng-model="contactInfo.contactNotifications" disabled>
+
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </div>
+      </a>-->
+      <!--<span class="item item-icon-left item-toggle profile-list-item profile-list-item-toggle hidingBorder">
+          Notifications
+          <label class="toggle toggle-balanced">
+            <input type="checkbox" ng-model="contactInfo.contactNotifications" disabled>
+
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </span>-->
+      <!--<a class="item set-listItems item-icon-right set-removingBorderAndPadding hidingBorder" href="#/tab/quiet-hours">
+        <div class="settings-backdrop-effect borderHalf2px">
+          Enable the teleCalm rules engine
+          <label class="toggle toggle-assertive">
+            <input type="checkbox">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </div>
+      </a>-->
+      <!--<a class="item set-listItems item-icon-right" href="#">
+        repeated call monitor
+        <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+      </a>-->
+      <!--<a class="item set-listItems item-icon-right" href="#">
+        call filtering
+        <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+      </a>-->
+      <!--<a class="item set-listItems item-icon-right" href="#">
+        smart dialing
+        <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+      </a>-->
+      <!--<a class="item set-listItems item-icon-right" href="#">
+        call recording
+        <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+      </a>-->
+      <!--<a class="item set-listItems item-icon-right">
+        block list subscription
+        <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+      </a>-->
+      <a class="item set-listItems item-icon-right set-removingBorderAndPadding hidingBorder" ng-click="goTo()">
+        <div class="settings-backdrop-effect">
+          personal block list
+          <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+        </div>
+      </a>
+
+      <!--<div class="item item-divider"></div>-->
+      <!--<a class="item set-listItems item-icon-right" href="#">
+        screen and clock format
+        <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+      </a>-->
+      <!--<a class="item set-listItems item-icon-right" href="#">
+        language preferences
+        <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+      </a>-->
+      <!-- <a class="item set-listItems item-icon-right" href="#" >
+         emergency and 911
+         <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+       </a>-->
+      <!-- <div class="item item-divider"></div>
+       <span class="item item-toggle set-listItems">
+         Dial Pad Override
+         <label class="toggle toggle-balanced">
+           <input type="checkbox" disabled>
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+       </span>-->
+
+      <li class="item item-toggle hidingBorder set-listItems" style="margin-left: 20px;color:black">
+        Enable outgoing call rules
+        <label class="toggle toggle-positive">
+          <input type="checkbox" ng-model="userOutgoingCallsSettings.checked" ng-change="allowOutgoingCalls()">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+
+      <div class="item item-divider item-text-wrap set-accountDivider set-accountDividerAccount" style="border:none;border-top: 1px solid #ddd;border-bottom:2px solid #ddd">
+        <!--<span class="set-accountDivider-txt">When enabled, pressing # and * on the teleCalm desk phone will override all rules for a single call.</span>-->
+        <span class="set-accountHeading">ACCOUNT : (Dev Environment) </span>
+        <div class="item setListItemAccountinfo set-removingBorderAndPadding hidingBorder">
+          <div class="set-listItemText borderHalf1px">
+            Name: {{userData.userFullName}}
+          </div>
+        </div>
+        <div class="item setListItemAccountinfo set-removingBorderAndPadding hidingBorder">
+          <div class="set-listItemText borderHalf1px">
+            Caregiver No: {{userData.userCaregiverNumber}}
+          </div>
+        </div>
+        <div class="item setListItemAccountinfo set-removingBorderAndPadding hidingBorder">
+          <div class="set-listItemText borderHalf1px" style="text-transform: none">
+            teleCalm No: {{userData.userMobile}}
+          </div>
+        </div>
+        <div class="item setListItemAccountinfo set-removingBorderAndPadding hidingBorder">
+          <div class="set-listItemText borderHalf1px" style="text-transform: none">
+            Version: 0.2 beta
+          </div>
+        </div>
+      </div>
+      <!--<a class="item set-listItems item-icon-right" href="#">
+        Users
+        <i class="icon ion-ios-arrow-forward set-forwardIcon"></i>
+      </a>-->
+
+
+      <a class="item set-listItems set-removingBorderAndPadding hidingBorder" href="#" ng-click="logoutUser()">
+        <div class="settings-backdrop-effect borderHalf1px">
+          Log Off
+        </div>
+      </a>
+      <!--<a class="item set-last-item" href="#">
+      </a>-->
+
+    </div>
+  </ion-content>
+</ion-view>

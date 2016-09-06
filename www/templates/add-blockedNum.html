@@ -1,0 +1,37 @@
+<ion-view>
+  <!--<div class="bar bar-header bar-calm history-header profile-header">
+
+    <h1 ng-click="goBack()" class="title addContct-cancel-btn">Cancel</h1>
+
+    <h1 class="title history-header-title profile-header-title">Add Blocked Number</h1>
+
+    <h1 ng-click="goBack()" class="title addContct-done-btn">Done</h1>
+  </div>-->
+  <ion-nav-bar class="bar-calm history-header profile-header" align-title="center">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon backBtns" ng-click="goBack()">
+        Cancel
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      Add Blocked Number
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon header-rightBtn" ng-click="saveBlockedContact(block)">
+        Done
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+
+  <ion-content class="has-header addBlocked-content">
+    <div class="list blockedList-list">
+      <label class="item item-input addBlocked-input">
+        <input type="text" placeholder="Enter Name (optional)" class="addBlocked-input-placeholder" ng-model="block.blockedName">
+      </label>
+      <label class="item item-input addBlocked-input">
+        <input type="text" placeholder="Enter number to block" class="addBlocked-input-placeholder" ng-model="block.blockedNumber">
+      </label>
+    </div>
+  </ion-content>
+</ion-view>

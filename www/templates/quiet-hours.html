@@ -1,0 +1,87 @@
+
+<ion-view view-title="Quiet Hours">
+  <ion-nav-bar class="bar-calm history-header profile-header" align-title="center">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon backBtns" ng-click="goBack()">
+        <i class="ion ion-chevron-left"></i>
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      Quiet Hours
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon header-rightBtn" ng-click="setQH(slider)">
+        Save
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <!--<div class="bar bar-header bar-calm dash-header">
+    <i class="icon ion-ios-arrow-back addBlocked-backIcon" ng-click="goBack()"></i>
+    <span class="addBlocked-headerTxt">
+      Quiet Hours
+    </span>
+  </div>-->
+  <ion-content class="has-header set-content quiteHours-content" padding="true" scroll="false">
+
+
+      <div class="item item-divider"></div>
+
+      <div class="item item-toggle quietHours-listItem">
+        Quiet Hours
+        <label class="toggle toggle-balanced">
+          <input type="checkbox" ng-model="userQHStatus.status" ng-change="restrictSlider()">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </div>
+<!--    <div>-->
+<!--      <label class="item item-input item-select">
+        <div class="input-label" >
+          Set Time Zone
+        </div>
+        <select>
+          <option> PST </option>
+          <option> MST </option>
+          <option> CST </option>
+          <option> EST </option>
+        </select>
+      </label>-->
+<!--    </div>-->
+        <!--<div class="item range range-positive">
+          <i class="icon ion-ios-sunny-outline"></i>
+          <input type="range" name="volume" min="0" max="100" value="33">
+          <i class="icon ion-ios-sunny"></i>
+        </div>-->
+
+      <!--<span class="slider-text">{{slider.minValue < 12 ? slider.minValue +'am' :  slider.minValue == 12 ? slider.minValue+'am' : slider.minValue > 5 ? slider.minValue+'pm' : ''  }}</span>
+      --><span class="slider-text">{{slider.minValue < 6 ? (slider.minValue+6) +'pm' :  slider.minValue == 6 ? '12am' : slider.minValue == 18 ? '12pm': slider.minValue > 6 ? (slider.minValue-6)+'am' : ''  }}</span>
+      <rzslider rz-slider-model="slider.minValue"
+                rz-slider-high="slider.maxValue"
+                rz-slider-options="slider.options">
+      </rzslider>
+      <span class="slider-text">{{slider.maxValue < 6 ? (slider.maxValue+6) +'pm' :  slider.maxValue == 6 ? '12am' : slider.maxValue == 18 ? '12pm': slider.maxValue > 6 ? (slider.maxValue-6)+'am' : ''  }}</span>
+
+     <!-- <span class="slider-text">{{slider.minValue > 12 ? slider.minValue-12+'pm' :  slider.minValue == 12 ? slider.minValue+'pm' :slider.minValue+'am'}}</span>
+      <rzslider rz-slider-model="slider.minValue"
+                rz-slider-high="slider.maxValue"
+                rz-slider-options="slider.options">
+      </rzslider>
+      <span class="slider-rightTxt">{{slider.maxValue > 12 ? slider.maxValue-12+'pm':slider.maxValue == 12 ? slider.maxValue+'am' :(slider.maxValue)+'pm'}}</span>
+      <div>
+        min{{slider.minValue}} | max {{ slider.maxValue}}
+      </div>-->
+
+      <div class="item item-divider quietHours-secDivider">
+        <span class="quietHours-dividerTxt">
+          Incoming and outgoing calls during Quiet Hours will be blocked and the caller will receive a custom recorded message. You can record the message under Voice Message Settings.
+        </span>
+      </div>
+    </div>
+  </ion-content>
+  <!--<ion-content padding="true" ng-controller="quietHoursCtrl">
+    <div range-slider min="0" max="100" model-min="demo1.min" model-max="demo1.max"></div>
+  </ion-content>-->
+</ion-view>
+

@@ -1,0 +1,112 @@
+<ion-view view-title="History">
+<div class="bar bar-header bar-calm history-header">
+
+  <div class="history-header-content">
+
+    <h1 class="title history-header-title">History</h1>
+    <div ng-click="rmFilter()" class="title history-header-title history-header-second-title-" ng-class="{allTxtBold : showAllTextBold}">All</div>
+
+    <div class="bar bar-subheader history-subHeader">
+      <div class="button-bar history-button-bar">
+        <a class="button history-button-bar-button" ng-click="toggle(b.state)" ng-class="{'history-active':b.flag}"
+           ng-repeat="b in btns"><i class="{{b.icon}} history-tab-button-icon"></i>{{b.label}}</a>
+      </div>
+    </div>
+  </div>
+  <div class="history-second-header-bar history-seacrhDiv">
+   <!-- <div class="list list-inset history-search-bar">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search History" ng-model="searchText">
+      </label>
+    </div>-->
+
+    <div class="list list-inset history-search-bar">
+      <label class="item item-input search-label">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search History" ng-model="searchText" ng-keypress="closeKeyboard($event)" ng-change="activeSearchCross()">
+        <i class="icon ion-close-circled search-crossIcon" ng-if="searchText && active" on-tap="clearSearch()"></i>
+      </label>
+    </div>
+    <a ng-class="{'searchbar-cancelBtnDeactive': !searchText}" class="searchbar-cancelBtn" ng-click="cancelSearch()">Cancel</a>
+
+    <div class="history-second-header-bar-content history-callsHeader">
+      <p>{{callName}} Calls</p>
+    </div>
+  </div>
+</div>
+
+<ion-content padding="true" class="has-header history-content" overflow-scroll="false">
+  <ion-list ng-show="filter!=false">
+    <div class="history-list">
+    <ion-item can-reorder="true" ng-click="showDetail(item)" ng-repeat="($index,item) in data.items | filter : data.filter | filter : searchText"  class="has-header history-list-item"
+              item="item2" ng-class="{'voicemail-listItem-bckColor':item.showGray}"
+              >
+
+      <!--<img class="history-calling-icon" ng-src="img/{{item.userCallType=='blocked'?'blockedCall1-icon':item.userCallType=='stranger'?'strangers-icon':'incoming-call'}}.png">
+      --><img class="history-calling-icon" ng-src="{{item.imgSrc}}">
+
+      <div class="history-list-content">
+        <span class="history-list-item-name">{{ item.contactFirstName + " " +item.contactLastName }}</span><br/>
+        <!--<span class="history-list-item-number">{{ item.call_direction=='inbound'?item.fromCaller:item.toCaller }}</span>-->
+        <span class="history-list-item-number">{{ item.call_direction=='inbound'?(item.fromCaller.substring(0,1)=='1'?item.fromCaller.substring(1,item.fromCaller.length):item.fromCaller):(item.toCaller.substring(0,1)=='1'?item.toCaller.substring(1,item.toCaller.length):item.toCaller) | telephoneformat  }}</span>
+        <div class="history-list-content-right-content hailee-font">
+          <span>{{item.moment}}</span><br/>
+          <span class="history-list-content-right-content-status hailee-font" ng-class={colorRed:item.type=='blocked',strangerColor:item.type=='strangers'}>{{item.showDuration}}<!--2 min{{item.status}}--></span>
+        </div>
+        <div class="history-expandDiv" ng-show="hiddenDiv.item==$index && showDiv && histStat=='strangers'">
+          <span class="expandDiv-firstItem" ng-click="gotoAddcontacts()">Create Contact</span>
+          <span class="expandDiv-secItem" ng-click="gotoAddblock()">Block Caller</span>
+        </div>
+      </div>
+
+    </ion-item>
+    </div>
+  </ion-list>
+  <ion-list ng-show="filter!=true">
+
+    <!--<ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>-->
+
+    <div class="history-list">
+
+      <ion-item can-reorder="true" ng-repeat="item in data.items  | filter : searchText"  class="has-header history-list-item" ng-click="showDetail(item)"
+                item="item2" ng-class="{'voicemail-listItem-bckColor':item.showGray}"
+        >
+        <img class="history-calling-icon" src="{{item.imgSrc}}">
+        <!--<img class="history-calling-icon" ng-src="img/{{item.userCallType=='blocked'?'blockedCall1-icon':item.userCallType=='stranger'?'strangers-icon':'incoming-call'}}.png">
+       --> <div class="history-list-content">
+          <span class="history-list-item-name">{{ item.contactFirstName + " " +item.contactLastName }}</span><br/>
+          <!--<span class="history-list-item-number">{{ item.call_direction=='inbound'?item.fromCaller:item.toCaller }}</span>-->
+          <span class="history-list-item-number">{{ item.call_direction=='inbound'?(item.fromCaller.substring(0,1)=='1'?item.fromCaller.substring(1,item.fromCaller.length):item.fromCaller):(item.toCaller.substring(0,1)=='1'?item.toCaller.substring(1,item.toCaller.length):item.toCaller) | telephoneformat  }}</span>
+          <div class="history-list-content-right-content hailee-font">
+            <span>{{item.moment}}</span><br/>
+            <!--<span class="history-list-content-right-content-status" ng-class="item.type=='blocked' ? 'colorRed' : ''">{{item.status}}</span>-->
+            <span class="hailee-font" ng-class={colorRed:item.type=='blocked',strangerColor:item.type=='strangers'}>{{item.showDuration}}</span>
+          </div>
+        </div>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ion-infinite-scroll
+
+    immediate-check="false"
+    ng-if="moreDataCanBeLoadedStatus && filter!=true"
+
+    icon="ion-loading-c"
+    on-infinite="doRefresh()">
+  </ion-infinite-scroll>
+
+  <!--<ion-content has-header="true" has-subheader="true" padding="false">-->
+
+  <!-- <div class="list">
+     <div class="item" ng-repeat="animal in data.animals | filter : data.filter">{{animal.name}}</div>
+
+   </div>-->
+
+
+</ion-content>
+</ion-view>

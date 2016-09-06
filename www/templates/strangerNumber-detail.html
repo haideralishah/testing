@@ -1,0 +1,57 @@
+<ion-view>
+  <!--<div class="bar bar-header bar-calm history-header profile-header">
+
+    <i class="ion ion-chevron-left profile-back-icon" on-tap="goBack()"></i>
+
+    <h1 class="title history-header-title profile-header-title">Blocked Number Detail</h1>
+
+    <h1 ng-click="goBack()" class="title addContct-done-btn">Edit</h1>
+  </div>-->
+  <ion-nav-bar class="bar-calm history-header profile-header" align-title="center">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon backBtns" ng-click="goBack()">
+        <i class="ion ion-chevron-left profile-back-icon"></i>
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      Stranger Number
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+      <!-- <button class="button button-icon header-rightBtn" ng-click="goBack()">
+         Edit
+       </button>-->
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content class="has-header addBlocked-content">
+    <div class="list blockedList-list">
+      <span class="item item-avatar blockedDetail-item">
+        <h2 class="blockedDetail-itemName">name</h2>
+        <p class="blockedDetail-itemValue">{{strangerInfo.contactFirstName}}</p>
+      </span>
+       <span class="item item-avatar blockedDetail-item">
+        <h2 class="blockedDetail-itemName">number</h2>
+        <p class="blockedDetail-itemValue">{{(strangerInfo.number.substring(0,1)=='1'?strangerInfo.number.substring(1,strangerInfo.number.length):strangerInfo.number | telephoneformat )}}</p>
+      </span>
+    </div>
+    <p class="addBlocked-mainTxt">This number will be blocked.</p>
+    <!--<button class="button button-light blockedDetail-deleteBtn">
+      Delete
+    </button>-->
+    <div class="blockBtn">
+      <button class="button button-light profile-blockList-btn" ng-click="moveStranger(strangerInfo)">
+        <i class="fa fa-ban profile-bann-icon"></i>
+        Move to Block List
+      </button>
+    </div>
+   <!-- <button class="button button-light notify-returnBtn">
+      Add To Contacts
+    </button>-->
+    <div class="addToContact-btn">
+      <button class="button button-light addContact-btn" ng-click="goTo()">
+        <!--<i class="fa fa-ban profile-bann-icon"></i>-->
+        Add To Contacts
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,596 @@
+<!--
+<ion-view view-title="History">
+
+
+
+  <div class="bar bar-header bar-calm dash-header">
+    <span class="headcss"   >Cancel</span>
+    <span class="set-headerTxt">
+    Voice Messages
+      </span>
+    <span class="headcss" ng-click="saveVoiceMessage()" >Save</span>
+  </div>
+
+
+
+  <ion-content class="has-header set-content" overflow-scroll="false">
+
+   &lt;!&ndash; <div class="list">
+
+      <div class="item item-divider customvoicemail-divider">
+      </div>
+      <a  class="item customvoicemail-item" href="#">
+        Default
+      </a>
+      <ion-list>
+        <ion-radio style="margin-left:10px; border-left:none"   ng-model="choice" ng-value="'A'">Custom</ion-radio>
+      </ion-list>
+
+      <div class="item item-divider">
+        <ion-audio-track track="track">
+          <div class="">
+            <ion-audio-progress-bar class="checking" track="track" display-time>
+            </ion-audio-progress-bar>
+            <ion-audio-controls>
+              <a class="button button-icon icon voicemail-playBtn" ion-audio-play></a>
+              <ion-spinner icon="ios" style="position: relative; top: 40px; left: 35%"></ion-spinner>
+            </ion-audio-controls>
+            <i class="icon ion-volume-high voicemail-volumeIcon"></i>
+            <ion-audio-progress class="voicemail-progress" track="track" class="ng-binding">{{scope.track.progress}}</ion-audio-progress>
+            <ion-audio-duration class="voicemail-progress" track="track" class="ng-binding">{{scope.track.duration?scope.track.duration:"00:00"}}</ion-audio-duration>
+          </div>
+        </ion-audio-track>
+      </div>
+    </div>
+&ndash;&gt;
+
+    <ion-list class="customVoiceMessages-list">
+
+
+        <ion-item can-reorder="true" ng-click="showDetail(item,'quietHoursItem')" class="has-header voicemail-list-item" item="item2">
+          <div class="customVoiceMessages-list-content">
+            <span class="history-list-item-name">Quiet Hours</span><br/>
+            &lt;!&ndash;<span class="history-list-item-number">{{ item.call_direction=='inbound'?item.fromCaller:item.toCaller }}</span>&ndash;&gt;
+            &lt;!&ndash;<span class="history-list-item-number">{{  item.record_direction=='inbound'?(item.fromCaller.substring(0,1)=='1'?item.fromCaller.substring(1,item.fromCaller.length):item.fromCaller):(item.toCaller.substring(0,1)=='1'?item.toCaller.substring(1,item.toCaller.length):item.toCaller)  | telephoneformat  }}</span>
+            <div class="history-list-content-right-content">
+              <span>{{item.callTime}}</span><br/>
+              <span class="history-list-content-right-content-status voicemailHistory-duration" ng-class={colorRed:item.type=='blocked',strangerColor:item.type=='strangers'}>{{item.showDuration}}&lt;!&ndash;2 min{{item.status}}&ndash;&gt;</span>
+            </div>&ndash;&gt;
+          </div>
+          <div ng-if="showQuietHoursDiv"  ng-click="$event.stopPropagation();">
+            <ion-audio-track track="tracks">
+              <div class="">
+                <ion-audio-progress-bar class="checking" track="tracks" display-time>
+                </ion-audio-progress-bar>
+                <ion-audio-controls>
+                  &lt;!&ndash;<i class="icon ion-ios-rewind voicemail-forwardIcon"></i>&ndash;&gt;
+                  <a class="button button-icon icon voicemail-playBtn" ion-audio-play ng-click="updateNotificationCount(item)"></a>
+                  <ion-spinner icon="ios" style="position: relative; top: 40px; left: 35%"></ion-spinner>
+                &lt;!&ndash;</ion-audio-controls>&ndash;&gt;
+                &lt;!&ndash;<i class="icon ion-volume-high voicemail-volumeIcon"></i>&ndash;&gt;
+                <ion-audio-progress class="voicemail-progress" track="track" class="ng-binding">{{scope.track.progress}}</ion-audio-progress>
+                <ion-audio-duration class="voicemail-progress" track="track" class="ng-binding">{{scope.track.duration?scope.track.duration:"00:00"}}</ion-audio-duration>
+              </div>
+              &lt;!&ndash;<div class="voicemail-controlDiv">
+              </div>&ndash;&gt;
+            </ion-audio-track>
+            &lt;!&ndash;<i class="icon ion-ios-trash-outline voicemailHistory-deleteIcon" ng-click="deleteVoicemail(item)"></i>&ndash;&gt;
+            <a class="customVoiceMessages-editBtn" href="" ng-click="captureAudio()">Edit</a>
+            &lt;!&ndash;<div class="voicemailDetail-btns">
+              <span class="voicemailDetail-deleteBtn">Delete</span>
+              <span class="voicemailDetail-callbackBtn">Call Back</span>
+            </div>&ndash;&gt;
+          </div>
+          <hr/>
+        </ion-item>
+
+           <ion-item can-reorder="true" ng-click="showDetail(item, 'strangerItem')"  class="has-header voicemail-list-item" item="item2">
+        <div class="customVoiceMessages-list-content">
+          <span class="history-list-item-name">Stranger</span><br/>
+          &lt;!&ndash;<span class="history-list-item-number">{{ item.call_direction=='inbound'?item.fromCaller:item.toCaller }}</span>&ndash;&gt;
+          &lt;!&ndash;<span class="history-list-item-number">{{  item.record_direction=='inbound'?(item.fromCaller.substring(0,1)=='1'?item.fromCaller.substring(1,item.fromCaller.length):item.fromCaller):(item.toCaller.substring(0,1)=='1'?item.toCaller.substring(1,item.toCaller.length):item.toCaller)  | telephoneformat  }}</span>
+          <div class="history-list-content-right-content">
+            <span>{{item.callTime}}</span><br/>
+            <span class="history-list-content-right-content-status voicemailHistory-duration" ng-class={colorRed:item.type=='blocked',strangerColor:item.type=='strangers'}>{{item.showDuration}}&lt;!&ndash;2 min{{item.status}}&ndash;&gt;</span>
+          </div>&ndash;&gt;
+        </div>
+        <div ng-if="showStrangerDiv"  ng-click="showDetail(item,'strangerItem')"  && 1==index" ng-click="$event.stopPropagation();">
+          <ion-audio-track track="track">
+            <div class="">
+              <ion-audio-progress-bar class="checking" track="track" display-time>
+              </ion-audio-progress-bar>
+              <ion-audio-controls>
+                &lt;!&ndash;<i class="icon ion-ios-rewind voicemail-forwardIcon"></i>&ndash;&gt;
+                <a class="button button-icon icon voicemail-playBtn" ion-audio-play ng-click="updateNotificationCount(item)"></a>
+                <ion-spinner icon="ios" style="position: relative; top: 40px; left: 35%"></ion-spinner>
+                &lt;!&ndash;</ion-audio-controls>&ndash;&gt;
+                &lt;!&ndash;<i class="icon ion-volume-high voicemail-volumeIcon"></i>&ndash;&gt;
+                <ion-audio-progress class="voicemail-progress" track="track" class="ng-binding">{{scope.track.progress}}</ion-audio-progress>
+                <ion-audio-duration class="voicemail-progress" track="track" class="ng-binding">{{scope.track.duration?scope.track.duration:"00:00"}}</ion-audio-duration>
+            </div>
+            &lt;!&ndash;<div class="voicemail-controlDiv">
+            </div>&ndash;&gt;
+          </ion-audio-track>
+          &lt;!&ndash;<i class="icon ion-ios-trash-outline voicemailHistory-deleteIcon" ng-click="deleteVoicemail(item)"></i>&ndash;&gt;
+          <a class="customVoiceMessages-editBtn" href="" ng-click="captureAudio()">Edit</a>
+          &lt;!&ndash;<div class="voicemailDetail-btns">
+            <span class="voicemailDetail-deleteBtn">Delete</span>
+            <span class="voicemailDetail-callbackBtn">Call Back</span>
+          </div>&ndash;&gt;
+        </div>
+        <hr/>
+      </ion-item>
+      <ion-item can-reorder="true" ng-click="showDetail(item, 'contactItem')"  class="has-header voicemail-list-item" item="item2">
+      <div class="customVoiceMessages-list-content">
+        <span class="history-list-item-name">Contact</span><br/>
+        &lt;!&ndash;<span class="history-list-item-number">{{ item.call_direction=='inbound'?item.fromCaller:item.toCaller }}</span>&ndash;&gt;
+        &lt;!&ndash;<span class="history-list-item-number">{{  item.record_direction=='inbound'?(item.fromCaller.substring(0,1)=='1'?item.fromCaller.substring(1,item.fromCaller.length):item.fromCaller):(item.toCaller.substring(0,1)=='1'?item.toCaller.substring(1,item.toCaller.length):item.toCaller)  | telephoneformat  }}</span>
+        <div class="history-list-content-right-content">
+          <span>{{item.callTime}}</span><br/>
+          <span class="history-list-content-right-content-status voicemailHistory-duration" ng-class={colorRed:item.type=='blocked',strangerColor:item.type=='strangers'}>{{item.showDuration}}&lt;!&ndash;2 min{{item.status}}&ndash;&gt;</span>
+        </div>&ndash;&gt;
+      </div>
+      <div ng-if="showContactDiv"  ng-click="showDetail(item,'contactItem')" >
+        <ion-audio-track track="track">
+          <div class="">
+            <ion-audio-progress-bar class="checking" track="track" display-time>
+            </ion-audio-progress-bar>
+            <ion-audio-controls>
+              &lt;!&ndash;<i class="icon ion-ios-rewind voicemail-forwardIcon"></i>&ndash;&gt;
+              <a class="button button-icon icon voicemail-playBtn" ion-audio-play ng-click="updateNotificationCount(item)"></a>
+              <ion-spinner icon="ios" style="position: relative; top: 40px; left: 35%"></ion-spinner>
+              &lt;!&ndash;</ion-audio-controls>&ndash;&gt;
+              &lt;!&ndash;<i class="icon ion-volume-high voicemail-volumeIcon"></i>&ndash;&gt;
+              <ion-audio-progress class="voicemail-progress" track="track" class="ng-binding">{{scope.track.progress}}</ion-audio-progress>
+              <ion-audio-duration class="voicemail-progress" track="track" class="ng-binding">{{scope.track.duration?scope.track.duration:"00:00"}}</ion-audio-duration>
+          </div>
+          &lt;!&ndash;<div class="voicemail-controlDiv">
+          </div>&ndash;&gt;
+        </ion-audio-track>
+        &lt;!&ndash;<i class="icon ion-ios-trash-outline voicemailHistory-deleteIcon" ng-click="deleteVoicemail(item)"></i>&ndash;&gt;
+        <a class="customVoiceMessages-editBtn" href="" ng-click="captureAudio()">Edit</a>
+        &lt;!&ndash;<div class="voicemailDetail-btns">
+          <span class="voicemailDetail-deleteBtn">Delete</span>
+          <span class="voicemailDetail-callbackBtn">Call Back</span>
+        </div>&ndash;&gt;
+      </div>
+      <hr/>
+    </ion-item>
+      <ion-item can-reorder="true" ng-click="showDetail(item, 'voiceMailItem'); "  class="has-header voicemail-list-item" item="item2" >
+        <div class="customVoiceMessages-list-content">
+          <span class="history-list-item-name">Voice Mail</span><br/>
+          &lt;!&ndash;<span class="history-list-item-number">{{ item.call_direction=='inbound'?item.fromCaller:item.toCaller }}</span>&ndash;&gt;
+          &lt;!&ndash;<span class="history-list-item-number">{{  item.record_direction=='inbound'?(item.fromCaller.substring(0,1)=='1'?item.fromCaller.substring(1,item.fromCaller.length):item.fromCaller):(item.toCaller.substring(0,1)=='1'?item.toCaller.substring(1,item.toCaller.length):item.toCaller)  | telephoneformat  }}</span>
+          <div class="history-list-content-right-content">
+            <span>{{item.callTime}}</span><br/>
+            <span class="history-list-content-right-content-status voicemailHistory-duration" ng-class={colorRed:item.type=='blocked',strangerColor:item.type=='strangers'}>{{item.showDuration}}&lt;!&ndash;2 min{{item.status}}&ndash;&gt;</span>
+          </div>&ndash;&gt;
+        </div>
+        <div ng-if="showVoiceMailDiv"  ng-click="showDetail(item,'voiceMailItem')" >
+          <ion-audio-track track="tracks">
+            <div class="">
+              <ion-audio-progress-bar class="checking" track="tracks" display-time>
+              </ion-audio-progress-bar>
+              <ion-audio-controls>
+                <a class="button button-icon icon voicemail-playBtn" ion-audio-play ng click="update()"></a>
+                <ion-spinner icon="ios" style="position: relative; top: 40px; left: 35%"></ion-spinner>
+              </ion-audio-controls>
+              <i class="icon ion-volume-high voicemail-volumeIcon"></i>
+              <ion-audio-progress class="voicemail-progress" track="tracks" class="ng-binding">{{scope.track.progress}}</ion-audio-progress>
+              <ion-audio-duration class="voicemail-progress" track="tracks" class="ng-binding">{{scope.track.duration?scope.track.duration:"00:00"}}</ion-audio-duration>
+            </div>
+          </ion-audio-track>
+          &lt;!&ndash;<i class="icon ion-ios-trash-outline voicemailHistory-deleteIcon" ng-click="deleteVoicemail(item)"></i>&ndash;&gt;
+          <a class="customVoiceMessages-editBtn" href="" ng-click="captureAudio()">Edit</a>
+          &lt;!&ndash;<div class="voicemailDetail-btns">
+            <span class="voicemailDetail-deleteBtn">Delete</span>
+            <span class="voicemailDetail-callbackBtn">Call Back</span>
+          </div>&ndash;&gt;
+        </div>
+        <hr/>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+-->
+<!--    <div class="row" style="text-align: center; background-color: rgba(218, 218, 218, 0.39);">
+      <div class="col " >
+        <a ng-click="captureAudio()" href="#"><i class="ion-ios-mic " style="color:#fb7d4a;font-size: 46px;" ></i></a>
+      </div>
+    </div>
+    <div class="list" id="range-bar">
+      <div class="item range range-positive" style=" border-radius: 50px;padding:18px; background-color: rgba(0, 0, 0, 0.54);border-color:transparent;">
+        &lt;!&ndash;<i class="icon ion-ios-sunny-outline"></i>&ndash;&gt;
+        &lt;!&ndash; <input type="range" name="volume" min="0" max="100" value="33"> &ndash;&gt;
+        <input type="range" name="volume" min="0" max="36" value="0" ng-model="showLine" readonly>
+        &lt;!&ndash;<i class="icon ion-ios-sunny"></i>&ndash;&gt;
+      </div>
+    </div>
+
+    <div style="text-align: center;">
+        <div class="row">
+            <div class="col">
+
+                <a ng-click="playSound()" href="#"><img  src="img/13-record-sound-check-playbutton.png" alt="" id="playbutton"/></a>
+                <a href="#"><img src="img/13-record-sound-check-pausebuttn.png" alt="" id="pausebuttn"/></a>
+
+              <p> {{Duration}}</p>
+            </div>
+        </div>
+    </div>
+    <br/>-->
+<!--    <div class="list">
+      <div class="item item-divider customvoicemail-divider">
+      </div>
+      <a  class="item customvoicemail-item" href="#">
+        Default
+      </a>
+      <ion-list>
+        <ion-radio style="margin-left:10px; border-left:none"   ng-model="choice" ng-value="'A'">Custom</ion-radio>
+      </ion-list>
+      <div class="item item-divider">
+        <ion-audio-track track="track">
+          <div class="">
+            <ion-audio-progress-bar class="checking" track="track" display-time>
+            </ion-audio-progress-bar>
+            <ion-audio-controls>
+              <a class="button button-icon icon voicemail-playBtn" ion-audio-play></a>
+              <ion-spinner icon="ios" style="position: relative; top: 40px; left: 35%"></ion-spinner>
+            </ion-audio-controls>
+            <i class="icon ion-volume-high voicemail-volumeIcon"></i>
+            <ion-audio-progress class="voicemail-progress" track="track" class="ng-binding">{{scope.track.progress}}</ion-audio-progress>
+            <ion-audio-duration class="voicemail-progress" track="track" class="ng-binding">{{scope.track.duration?scope.track.duration:"00:00"}}</ion-audio-duration>
+          </div>
+        </ion-audio-track>
+      </div>
+    </div>
+    <button  class="button button-light notify-returnBtn">
+      Record
+    </button>-->
+
+<ion-view view-title="Record Sound Check" id="bgImage">
+  <div class="bar bar-header bar-calm topbar-background">
+    <div class="buttons">
+      <button class="button button-clear" ng-click="goBack()"><i class="ion ion-chevron-left"></i></button>
+    </div>
+    <h1 class="title" style="font-weight: bold">Voice Messages</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="saveVoiceMessage()"><b>Save</b></button>
+    </div>
+
+    <!--<span class="headcss" ng-click="goBack()">
+      <i class="ion ion-chevron-left"></i>
+       </span>
+    <span class="set-headerTxt">
+    Voice Messages
+      </span>-->
+    <!-- <span class="headcss" ng-click="saveVoiceMessage()">Save</span>-->
+  </div>
+  <ion-content class="has-header">
+    <div class="list" style="margin-top: 20px;">
+      <div ng-click="toggleActiveBox('first')" class="item item-divider">
+        <span>Quiet Hours </span> <span style="float: right;">
+        <i ng-class="openedDetails.first ?  'icon ion-minus-round'  :  'icon ion-plus-round'" class=""></i></span>
+      </div>
+      <div ng-if="openedDetails.first" class="item">
+        <div class="range">
+      <!--    <i class="icon ion-play" ng-if="!isPlaying" ng-click="playCurrentMessage(userVoiceMessageObject.voiceQuiteHours,userVoiceMessageObject.voiceQuiteHoursDuration); $event.stopPropagation();"></i>
+          <i class="icon ion-stop" ng-if="isPlaying" ng-click="StopPlay(); $event.stopPropagation();"></i>-->
+          <input type="range" name="volume" ng-model="currentMessage.currentSeekTime" min="0"
+                 max="{{userVoiceMessageObject.voiceQuiteHoursDuration}}" disabled>
+          <!--<i class="icon ion-volume-high"></i>-->
+        </div>
+        <div class="row">
+          <div class="col col-33 text-left">
+            <button class="button button-small  button-clear button-positive set-edit"
+                    ng-if="!isPlaying" ng-click="playCurrentMessage(userVoiceMessageObject.voiceQuiteHours,userVoiceMessageObject.voiceQuiteHoursDuration); $event.stopPropagation();">
+              Play
+            </button>
+            <button class="button button-small  button-clear button-positive set-edit"
+                    ng-if="isPlaying" ng-click="StopPlay(); $event.stopPropagation();">
+              Stop
+            </button>
+          </div>
+          <div class="col col-33 text-center">
+            <button class="button button-small  button-clear button-positive set-edit"
+                    ng-click="editCustomMessage('quite')"
+                    ng-disabled="disablePlayButton">
+              Record
+            </button>
+          </div>
+          <div class="col col-33 text-right">
+            <button class="button button-small  button-clear button-positive set-edit"
+                    ng-click="resetDefaultMessage(1)">
+              Default
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--<div class="list" style="margin-top: 20px;">
+        <div ng-click="toggleActiveBox('first')" class="item item-divider">
+          <span>Quiet Hours </span> <span style="float: right;">
+        <i ng-class="openedDetails.first ?  'icon ion-minus-round'  :  'icon ion-plus-round'" class=""></i></span>
+        </div>
+        <div ng-if="openedDetails.first" class="item">
+          <div class="range">
+            <i class="icon ion-play" ng-if="!isPlaying" ng-click="playCurrentMessage(userVoiceMessageObject.voiceQuiteHours,userVoiceMessageObject.voiceQuiteHoursDuration); $event.stopPropagation();"></i>
+            <i class="icon ion-stop" ng-if="isPlaying" ng-click="StopPlay(); $event.stopPropagation();"></i>
+            <input type="range" name="volume" ng-model="currentMessage.currentSeekTime" min="0"
+                   max="{{userVoiceMessageObject.voiceQuiteHoursDuration}}" disabled>
+            <i class="icon ion-volume-high"></i>
+          </div>
+          <div class="text-center">
+            <button class="button-clear vmEditButton" ng-click="editCustomMessage('quite')"
+                    ng-disabled="disablePlayButton">Edit
+            </button>
+          <span class="customVoiceMessage-totalTime" ng-if="currentMessage.currentTime==0">
+            00:{{userVoiceMessageObject.voiceQuiteHoursDuration}}
+          </span>
+          <span class="customVoiceMessage-totalTime" ng-if="currentMessage.currentTime!=0">
+            -00:{{currentMessage.currentTime< 10?"0"+currentMessage.currentTime:currentMessage.currentTime}}
+          </span>
+          </div>
+        </div>
+-->
+
+      <div ng-click="toggleActiveBox('second')" class="item item-divider">
+        <span>Contacts </span> <span style="float: right;">
+        <i ng-class="openedDetails.second ?  'icon ion-minus-round'  :  'icon ion-plus-round'" class=""></i></span>
+      </div>
+      <div ng-if="openedDetails.second" class="item">
+        <div class="range">
+          <!--{{cmDurations.cmContactDuration}}-->
+          <!--<i class="icon ion-play" ng-if="!isPlaying" ng-click="playCurrentMessage(userVoiceMessageObject.voiceContacts,userVoiceMessageObject.voiceContactsDuration); $event.stopPropagation();"></i>
+          <i class="icon ion-stop" ng-if="isPlaying" ng-click="StopPlay(); $event.stopPropagation();"></i>-->
+          <input type="range" name="volume" ng-model="currentMessage.currentSeekTime" min="0"
+                 max="{{userVoiceMessageObject.voiceContactsDuration}}" disabled>
+         <!-- <i class="icon ion-volume-high"></i>-->
+
+        </div>
+        <div class="row">
+            <div class="col col-33 text-left">
+              <button class="button button-small  button-clear button-positive set-edit"
+                      ng-if="!isPlaying" ng-click="playCurrentMessage(userVoiceMessageObject.voiceContacts,userVoiceMessageObject.voiceContactsDuration); $event.stopPropagation();">
+                Play
+              </button>
+              <button class="button button-small  button-clear button-positive set-edit"
+                      ng-if="isPlaying" ng-click="StopPlay(); $event.stopPropagation();">
+                Stop
+              </button>
+            </div>
+            <div class="col col-33 text-center">
+              <button class="button button-small  button-clear button-positive set-edit"
+                      ng-click="editCustomMessage('contact')"
+                      ng-disabled="disablePlayButton">
+                Record
+              </button>
+            </div>
+            <div class="col col-33 text-right">
+              <button class="button button-small  button-clear button-positive set-edit"
+                      ng-click="resetDefaultMessage(3)">
+                Default
+              </button>
+            </div>
+          </div>
+        <!--<button class="button-clear vmEditButton" ng-click="editCustomMessage('contact')"
+                  ng-disabled="disablePlayButton">Edit
+          </button>
+          <span class="customVoiceMessage-totalTime" ng-if="currentMessage.currentTime==0">
+            00:{{userVoiceMessageObject.voiceContactsDuration}}
+          </span>
+          <span class="customVoiceMessage-totalTime" ng-if="currentMessage.currentTime!=0">
+            -00:{{currentMessage.currentTime< 10?"0"+currentMessage.currentTime:currentMessage.currentTime}}
+          </span>
+          &lt;!&ndash;<span class="customVoiceMessage-totalTime" >{{cmDurations.cmContactTotalDuration}}</span>&ndash;&gt;
+          &lt;!&ndash;<span class="customVoiceMessage-totalTime" >00:{{cmDurations.cmContactDuration | digits}}</span>&ndash;&gt;
+          &lt;!&ndash;<span ng-if="contactDurationShow" class="customVoiceMessage-totalTime">
+           00:{{cmDurations.cmContactDuration | digits}}
+         </span>
+         <span ng-if="!contactDurationShow" class="customVoiceMessage-totalTime">
+           00:{{cmContactDuration | digits}}
+         </span>&ndash;&gt;
+
+        </div>-->
+      </div>
+
+
+      <div ng-click="toggleActiveBox('third')" class="item item-divider">
+        <span>Strangers </span> <span style="float: right;">
+        <i ng-class="openedDetails.third ?  'icon ion-minus-round'  :  'icon ion-plus-round'" class=""></i></span>
+      </div>
+      <div ng-if="openedDetails.third" class="item">
+        <div class="range">
+          <!--{{cmDurations.cmStrangersDuration}}-->
+      <!--    <i class="icon ion-play" ng-if="!isPlaying" ng-click="playCurrentMessage(userVoiceMessageObject.voiceStranger,userVoiceMessageObject.voiceStrangerDuration); $event.stopPropagation();"></i>
+          <i class="icon ion-stop" ng-if="isPlaying" ng-click="StopPlay(); $event.stopPropagation();"></i>-->
+          <input type="range" name="volume" ng-model="currentMessage.currentSeekTime" min="0"
+                 max="{{userVoiceMessageObject.voiceStrangerDuration}}" disabled>
+          <!--<i class="icon ion-volume-high"></i>-->
+        </div>
+
+        <div class="row">
+          <div class="col col-33 text-left">
+            <button class="button button-small  button-clear button-positive set-edit"
+                    ng-if="!isPlaying" ng-click="playCurrentMessage(userVoiceMessageObject.voiceStranger,userVoiceMessageObject.voiceStrangerDuration); $event.stopPropagation();">
+              Play
+            </button>
+            <button class="button button-small  button-clear button-positive set-edit"
+                    ng-if="isPlaying" ng-click="StopPlay(); $event.stopPropagation();">
+              Stop
+            </button>
+          </div>
+          <div class="col col-33 text-center">
+            <button class="button button-small  button-clear button-positive set-edit"
+                    ng-click="editCustomMessage('stranger')"
+                    ng-disabled="disablePlayButton">
+              Record
+            </button>
+          </div>
+          <div class="col col-33 text-right">
+            <button class="button button-small  button-clear button-positive set-edit"
+                    ng-click="resetDefaultMessage(2)">
+              Default
+            </button>
+          </div>
+          <!--<button class="button-clear vmEditButton" ng-click="editCustomMessage('stranger')"
+                  ng-disabled="disablePlayButton">Edit
+          </button>
+          <span class="customVoiceMessage-totalTime" ng-if="currentMessage.currentTime==0">
+            00:{{userVoiceMessageObject.voiceStrangerDuration}}
+          </span>
+          <span class="customVoiceMessage-totalTime" ng-if="currentMessage.currentTime!=0">
+            -00:{{currentMessage.currentTime< 10?"0"+currentMessage.currentTime:currentMessage.currentTime}}
+          </span>-->
+          <!--<span class="customVoiceMessage-totalTime" > {{cmDurations.cmStrangersTotalDuration}}</span>-->
+          <!--<span class="customVoiceMessage-totalTime" > 00: {{cmDurations.cmStrangersDuration | digits}}</span>-->
+
+          <!--<span ng-if="strangerDurationShow" class="customVoiceMessage-totalTime">
+           00:{{cmDurations.cmStrangersDuration | digits}}
+         </span>
+         <span ng-if="!strangerDurationShow" class="customVoiceMessage-totalTime">
+           00:{{cmStrangersDuration | digits}}
+         </span>-->
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </ion-content>
+
+
+  <!--  <ion-content class="has-header">
+      <div class="list" style="margin-top: 20px;">
+
+        <div ng-click="QuiteHouretoggleCollapse()" class="item item-divider">
+          <span>Quite Hours </span> <span style="float: right;">
+          <i ng-class="QuitHoureCollapseStatus ?  'icon ion-minus-round'  :  'icon ion-plus-round'" class=""></i></span>
+        </div>
+
+
+        <div ng-if="QuitHoureCollapseStatus" class="item">
+          <div class="range">
+            <i ng-class="$PauseQuit ?  'icon ion-pause '  :  'icon ion-play'"
+               ng-click="playCustomMessage('quite'); $event.stopPropagation();"></i>
+            &lt;!&ndash;{{cmDurations.cmQuitHourDuration}}&ndash;&gt;
+            <input type="range" name="volume" ng-model="cmDurations.cmQuiteHourDuration" min="0"
+                   max="{{cmDurations.cmQuiteHourTotalDuration}}" disabled>
+            <i class="icon ion-volume-high"></i>
+
+          </div>
+          <div class="text-center">
+            <button class="button-clear vmEditButton" ng-click="editCustomMessage('quite')"
+                    ng-disabled="disablePlayButton">Edit
+            </button>
+            &lt;!&ndash;<span class="customVoiceMessage-totalTime" >{{cmDurations.cmQuiteHourTotalDuration}}</span>&ndash;&gt;
+
+            &lt;!&ndash;<span class="customVoiceMessage-totalTime" >00:{{cmDurations.cmQuiteHourDuration | digits}}</span>&ndash;&gt;
+            <span ng-if="quitDurationShow" class="customVoiceMessage-totalTime">
+              00:{{cmDurations.cmQuiteHourDuration | digits}}
+            </span>
+            <span ng-if="!quitDurationShow" class="customVoiceMessage-totalTime">
+              00:{{cmQuiteHourDuration | digits}}
+            </span>
+          </div>
+        </div>
+
+
+        <div ng-click="ContactstoggleCollapse()" class="item item-divider">
+          Contacts  <span style="float: right;">
+          <i ng-class="ContactsCollapseStatus ?  'icon ion-minus-round'  :  'icon ion-plus-round'" class=""></i></span>
+
+        </div>
+        <div ng-if="ContactsCollapseStatus" class="item">
+          <div class="range">
+            &lt;!&ndash;{{cmDurations.cmContactDuration}}&ndash;&gt;
+            <i ng-class="$PauseContact ?  'icon ion-pause'  :  'icon ion-play'"
+               ng-click="playCustomMessage('contact')"></i>
+            <input type="range" name="volume" ng-model="cmDurations.cmContactDuration" min="0"
+                   max="{{cmDurations.cmContactTotalDuration}}" disabled>
+            <i class="icon ion-volume-high"></i>
+
+          </div>
+
+          <div class="text-center">
+            <button class="button-clear vmEditButton" ng-click="editCustomMessage('contact')"
+                    ng-disabled="disablePlayButton">Edit
+            </button>
+            &lt;!&ndash;<span class="customVoiceMessage-totalTime" >{{cmDurations.cmContactTotalDuration}}</span>&ndash;&gt;
+            &lt;!&ndash;<span class="customVoiceMessage-totalTime" >00:{{cmDurations.cmContactDuration | digits}}</span>&ndash;&gt;
+             <span ng-if="contactDurationShow" class="customVoiceMessage-totalTime">
+              00:{{cmDurations.cmContactDuration | digits}}
+            </span>
+            <span ng-if="!contactDurationShow" class="customVoiceMessage-totalTime">
+              00:{{cmContactDuration | digits}}
+            </span>
+
+          </div>
+        </div>
+        <div ng-click="StrangerstoggleCollapse()" class="item item-divider">
+
+          Strangers  <span style="float: right;">
+         <i ng-class="StrangersCollapseStatus ?  'icon ion-minus-round'  :  'icon ion-plus-round'" class=""></i></span>
+
+        </div>
+        <div ng-if="StrangersCollapseStatus" class="item">
+          <div class="range">
+            &lt;!&ndash;{{cmDurations.cmStrangersDuration}}&ndash;&gt;
+            <i ng-class="$PauseStranger ?  'icon ion-pause'  :  'icon ion-play'"
+               ng-click="playCustomMessage('stranger')"></i>
+            <input type="range" name="volume" ng-model="cmDurations.cmStrangersDuration" min="0"
+                   max="{{cmDurations.cmStrangersTotalDuration}}" disabled>
+            <i class="icon ion-volume-high"></i>
+
+          </div>
+
+
+          <div class="text-center">
+            <button class="button-clear vmEditButton" ng-click="editCustomMessage('stranger')"
+                    ng-disabled="disablePlayButton">Edit
+            </button>
+            &lt;!&ndash;<span class="customVoiceMessage-totalTime" > {{cmDurations.cmStrangersTotalDuration}}</span>&ndash;&gt;
+            &lt;!&ndash;<span class="customVoiceMessage-totalTime" > 00: {{cmDurations.cmStrangersDuration | digits}}</span>&ndash;&gt;
+
+             <span ng-if="strangerDurationShow" class="customVoiceMessage-totalTime">
+              00:{{cmDurations.cmStrangersDuration | digits}}
+            </span>
+            <span ng-if="!strangerDurationShow" class="customVoiceMessage-totalTime">
+              00:{{cmStrangersDuration | digits}}
+            </span>
+
+          </div>
+
+        </div>
+        &lt;!&ndash;        <div ng-click="VoicemailtoggleCollapse()" class="item item-divider">
+                Voicemail  <span style="float: right;">
+                <i ng-class="VoicemailCollapseStatus ?  'icon ion-minus-round'  :  'icon ion-plus-round'" class=""></i></span>
+               </div>
+             <div ng-if="VoicemailCollapseStatus" class="item">
+                <div class="range">
+                  &lt;!&ndash;{{cmDurations.cmVoiceDuration}}&ndash;&gt;
+                  <i ng-class="$PauseVoice ?  'icon ion-pause'  :  'icon ion-play'" ng-click="playCustomMessage('voice');"></i>
+                  <input type="range" name="volume" ng-model="cmDurations.cmVoiceDuration" min="0"
+                         max="{{cmDurations.cmVoiceTotalDuration}}" disabled>
+                  <i class="icon ion-volume-high"></i>
+
+                </div>
+                <div class="text-center">
+                  <button ng-disabled="disablePlayButton" class="button-clear vmEditButton"
+                          ng-click="editCustomMessage('voice');">Edit
+                  </button>
+                  &lt;!&ndash;<span class="customVoiceMessage-totalTime" >{{cmDurations.cmVoiceTotalDuration}}</span>&ndash;&gt;
+                  <span ng-if="voiceDurationShow" class="customVoiceMessage-totalTime">
+                    00:{{cmDurations.cmVoiceDuration | digits}}
+                  </span>
+                  <span ng-if="!voiceDurationShow" class="customVoiceMessage-totalTime">
+                    00:{{cmVoiceDuration | digits}}
+                  </span>
+
+
+                </div>
+              </div>&ndash;&gt;
+      </div>
+    </ion-content>-->
+</ion-view>
+

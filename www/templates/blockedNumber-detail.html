@@ -1,0 +1,59 @@
+<ion-view>
+  <!--<div class="bar bar-header bar-calm history-header profile-header">
+
+    <i class="ion ion-chevron-left profile-back-icon" on-tap="goBack()"></i>
+
+    <h1 class="title history-header-title profile-header-title">Blocked Number Detail</h1>
+
+    <h1 ng-click="goBack()" class="title addContct-done-btn">Edit</h1>
+  </div>-->
+  <ion-nav-bar class="bar-calm history-header profile-header" align-title="center">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon backBtns" ng-click="goBack()" ng-class="enableEdit ? 'noDisplay' : ''">
+        <i class="ion ion-chevron-left profile-back-icon"></i>
+      </button>
+      <button class="button button-icon backBtns" ng-click="cancelEditing()"  ng-class="!enableEdit ? 'noDisplay' : ''">
+        Cancel
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      Blocked Number
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon header-rightBtn" ng-click="editContacts()"  ng-class="enableEdit ? 'noDisplay' : ''">
+        Edit
+      </button>
+      <button class="button button-icon header-rightBtn" ng-click="saveBlockedContact(blockedContactInfo)"  ng-class="!enableEdit ? 'noDisplay' : ''">
+        Save
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content class="has-header addBlocked-content">
+    <div class="list blockedList-list" ng-if="!enableEdit">
+      <span class="item item-avatar blockedDetail-item">
+        <h2 class="blockedDetail-itemName">name</h2>
+        <p class="blockedDetail-itemValue">{{blockedContactInfo.blockedName}}</p>
+      </span>
+       <span class="item item-avatar blockedDetail-item">
+        <h2 class="blockedDetail-itemName">number</h2>
+        <p class="blockedDetail-itemValue">{{(blockedContactInfo.blockedNumber.substring(0,1)=='1'?blockedContactInfo.blockedNumber.substring(1,blockedContactInfo.blockedNumber.length):blockedContactInfo.blockedNumber)}}</p>
+      </span>
+    </div>
+
+    <div class="list blockedList-list" ng-if="enableEdit">
+      <span class="item item-avatar blockedDetail-item">
+        <h2 class="blockedDetail-itemName">name</h2>
+        <input type="text" class="blockedDetail-itemValue" ng-model="blockedContactInfo.blockedName">
+      </span>
+       <span class="item item-avatar blockedDetail-item">
+        <h2 class="blockedDetail-itemName">number</h2>
+        <p class="blockedDetail-itemValue">{{(blockedContactInfo.blockedNumber.substring(0,1)=='1'?blockedContactInfo.blockedNumber.substring(1,blockedContactInfo.blockedNumber.length):blockedContactInfo.blockedNumber)}}</p>
+      </span>
+    </div>
+    <!--class="button button-light blockedDetail-deleteBtn"-->
+    <button class="button button-light blockedDetail-deleteBtn " ng-click="deleteBlocked()">
+      Delete
+    </button>
+  </ion-content>
+</ion-view>

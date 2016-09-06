@@ -1,0 +1,72 @@
+<ion-view cache-view="false">
+
+  <ion-nav-bar class="bar-calm history-header profile-header blockList-header" align-title="center">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon" ng-click="goBack()">
+        <i class="ion ion-chevron-left"></i>
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      Personal Block List
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon backBtns header-rightBtn" ui-sref="tab.add-blocked">
+        Add
+      </button>
+    </ion-nav-buttons>
+
+    <div class="bar perBlockList-subHeader ">
+      <div class="button-bar history-button-bar perBlockList-barBtn">
+        <a class="button history-button-bar-button" ng-click="toggle(b.state)" ng-class="{'history-active ':b.flag}"
+           ng-repeat="b in btns"><i class="{{b.icon}} history-tab-button-icon"></i>{{b.label}}</a>
+      </div>
+    </div>
+
+  </ion-nav-bar>
+
+  <div class="bar bar-subheader personalBlockList-second-header-bar perBlockList-searchDiv">
+
+    <div class="list list-inset history-search-bar perBlockList-searchBar">
+      <label class="item item-input search-label">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search History" ng-model="searchText" ng-keypress="closeKeyboard($event)" ng-change="activeSearchCross()">
+        <i class="icon ion-close-circled search-crossIcon" ng-if="searchText && active" on-tap="clearSearch()"></i>
+      </label>
+    </div>
+    <a ng-class="{'searchbar-cancelBtnDeactive': !searchText}" class="searchbar-cancelBtn-personalBlockList" ng-click="cancelSearch()">Cancel</a>
+  </div>
+
+    <div class="perBlockList-letterCol">
+    <span href="tab/contacts.html#A">A</span> <br> <span>B</span> <br> <span>C</span> <br> D <br> E <br> F <br> G <br> H <br> I <br> <a href="#J">J</a> <br> K <br> L <br> M <br>
+    N <br> O <br> P <br> Q <br> R <br> S <br> T <br> U <br> V <br> W <br> X <br> Y <br> Z
+  </div>
+
+  <ion-content padding="true" class="has-header perBlockList-content">
+    <ion-list class="contacts-list">
+      <ion-list class="contacts-list">
+        <div ng-repeat="group in groups | filter:{ name: searchText.substring(0,1)}" ng-if="callName=='names'">
+          <ion-item class="contacts-list-bar">
+            &nbsp;
+            {{group.name}}
+          </ion-item>
+          <ion-item class="item-accordion blocked-lists-item"
+                    ng-repeat="item in group.items | filter:{ firstName: searchText}"  ui-sref="tab.blockedNumber-detail({number:item.blockedNumber})">
+            <span class="history-list-item-name">{{ item.blockedName }}</span><br/>
+            <span class="history-list-item-number">{{(item.blockedNumber.substring(0,1)=='1'?item.blockedNumber.substring(1,item.blockedNumber.length):item.blockedNumber) | telephoneformat }}</span>
+          </ion-item>
+        </div>
+
+        <div ng-repeat="group in groups | filter:{ name: searchText.substring(0,1)}"  ng-if="callName=='numbers'">
+
+          <ion-item class="item-accordion blocked-lists-item"
+                    ng-repeat="item in group.items | filter:{ firstName: searchText} | orderBy: item.num" ui-sref="tab.blockedNumber-detail({number:item.blockedNumber})">
+            <span class="contacts-list-text">{{ item.blockedName }}</span><br/>
+            <span class="history-list-item-number">{{(item.blockedNumber.substring(0,1)=='1'?item.blockedNumber.substring(1,item.blockedNumber.length):item.blockedNumber) | telephoneformat }}</span>
+          </ion-item>
+        </div>
+      </ion-list>
+
+    </ion-list>
+  </ion-content>
+
+</ion-view>
